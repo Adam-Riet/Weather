@@ -17,6 +17,9 @@
     h2 {
         justify-content: space-around;
         margin-bottom: 10px;
+        margin-bottom: 0.5rem;
+        margin-left: 0.5rem;
+        color: var(--first);
         }
     
     body {
@@ -47,7 +50,7 @@
     
     input[type="text"] {
         display: block;
-        width: 100%;
+        width: 50%;
         padding: 6px 12px;
         font-size: 14px;
         line-height: 1.42857143;
@@ -58,10 +61,11 @@
         border-radius: 4px;
         box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
         margin-bottom: 0.5rem;
+        margin-left: 0.5rem;
     }
     
     button {
-        background-color: #007bff;
+        background-image: linear-gradient(to right, var(--third), var(--fifth), var(--first));
         border: none;
         color: white;
         padding: 6px 12px;
@@ -69,10 +73,11 @@
         text-decoration: none;
         display: inline-block;
         font-size: 14px;
-        margin: 4px 2px;
+        margin-bottom: 0.5rem;
+        margin-left: 0.5rem;
         cursor: pointer;
         border-radius: 4px;
-        width: 100%;
+        width: 50%;
         height: 36px; /* Adjust the height to match the search box */
     }
 
