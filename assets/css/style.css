@@ -78,10 +78,20 @@
         cursor: pointer;
         border-radius: 4px;
         width: 50%;
-        height: 36px; /* Adjust the height to match the search box */
+        height: 36px; 
     }
 
     .previous-searches {
         margin-top: 1rem;
-        /* Add other styles as needed */
+        
     }
+
+    hr {
+        border: 0;
+        border-top: 1px solid var(--second); 
+        margin-top: 1rem; 
+        margin-bottom: 1rem;
+        width: 50%;
+        margin-left: 0.5rem; 
+    }
+    
