@@ -1,14 +1,20 @@
 var cityInputEl = document.querySelector('#searchBox');
-var cityHistoryEl = document.querySelector('#previous-searchers');
+var cityHistoryEl = document.querySelector('#previous-searches');
 var weatherInfoEl = document.querySelector('#weather-data');
 var searchButtonEl = document.querySelector('button');
 
-//create function storing user city in local storage
+//Saving user city to local storage.
+    function saveCity(cityName) {
+    var cities = JSON.parse(localStorage.getItem('cities')) || [];
+  
+    if (!cities.includes(cityName)) {
+      cities.push(cityName);
+      localStorage.setItem('cities', JSON.stringify(cities));
+    }}
+    
 
-//create function adding city saved in local storage as a button that can be selected later
-
-
-  var citySubmitHandler = function (event) {
+//Function to gather user city submission in the form. Alert if nothing is submitted.
+    var citySubmitHandler = function (event) {
     event.preventDefault();
   
     var cityName = cityInputEl.value.trim();
@@ -21,11 +27,11 @@ var searchButtonEl = document.querySelector('button');
       cityHistoryEl.textContent = '';
       cityInputEl.value = '';
 
-   
+      loadPreviousSearches();
     } else {
       alert('Please enter a city');
     }
-  };
+    };
 
 
 //create function calling weather api to get 5 day forcast
@@ -48,7 +54,7 @@ var searchButtonEl = document.querySelector('button');
 
 
 
-
+loadPreviousSearches();
 searchButtonEl.addEventListener('click', citySubmitHandler);
 
 
