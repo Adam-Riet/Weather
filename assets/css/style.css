@@ -50,7 +50,7 @@
     
     input[type="text"] {
         display: block;
-        width: 50%;
+        width: 25%;
         padding: 6px 12px;
         font-size: 14px;
         line-height: 1.42857143;
@@ -77,8 +77,9 @@
         margin-left: 0.5rem;
         cursor: pointer;
         border-radius: 4px;
-        width: 50%;
+        width: 25%;
         height: 36px; 
+        display: flex;
     }
 
     .previous-searches {
@@ -91,7 +92,7 @@
         border-top: 1px solid var(--second); 
         margin-top: 1rem; 
         margin-bottom: 1rem;
-        width: 50%;
+        width: 25%;
         margin-left: 0.5rem; 
     }
     
