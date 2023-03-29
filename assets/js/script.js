@@ -11,6 +11,23 @@ var searchButtonEl = document.querySelector('button');
       cities.push(cityName);
       localStorage.setItem('cities', JSON.stringify(cities));
     }}
+
+// Function to load previous searches from local storage and display them as buttons
+    function loadPreviousSearches() {
+    var cities = JSON.parse(localStorage.getItem('cities')) || [];
+    var previousSearchesEl = document.querySelector('#previous-searches');
+    previousSearchesEl.innerHTML = '';
+  
+    cities.forEach(function (city) {
+      var cityBtn = document.createElement('button');
+      cityBtn.textContent = city;
+      cityBtn.classList.add('previous-search-btn');
+      cityBtn.addEventListener('click', function () {
+        
+      });
+      previousSearchesEl.appendChild(cityBtn);
+    });}
+  
     
 
 //Function to gather user city submission in the form. Alert if nothing is submitted.
