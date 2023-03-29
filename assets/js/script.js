@@ -18,7 +18,7 @@ var searchFormEl = document.querySelector('#searchForm');
     var cities = JSON.parse(localStorage.getItem('cities')) || [];
     var previousSearchesEl = document.querySelector('#previous-searches');
     previousSearchesEl.innerHTML = '';
-  
+//Appending search history as buttons user can click on. 
       cities.forEach(function (city) {
       var cityBtn = document.createElement('button');
       cityBtn.textContent = city;
@@ -52,6 +52,26 @@ var citySubmitHandler = function (event) {
 
 
 //create function calling weather api to get 5 day forcast
+function weatherData(cityName){
+    var apiKey = 'd94fcd0a3f247519e9f2462c13c0bc86';
+    var weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
+
+
+    fetch(weatherUrl)
+    .then(function (response) {
+        if (response.status === 200) {
+            return response.json();
+        } else {
+            alert('Failed to fetch weather data');
+        }
+    })
+    .then(function (data) {
+        console.log(data);
+    })
+    .catch(function (error) {
+        alert('Error fetching weather data');
+    });
+}
 
 
 
@@ -71,8 +91,9 @@ var citySubmitHandler = function (event) {
 
 
 
+weatherData(cityName);
 loadPreviousSearches();
 
 searchFormEl.addEventListener('submit', citySubmitHandler);
 
-var apiUrl = 'api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={d94fcd0a3f247519e9f2462c13c0bc86}';
+// var apiUrl = 'api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={d94fcd0a3f247519e9f2462c13c0bc86}';
