@@ -32,24 +32,23 @@ var searchFormEl = document.querySelector('#searchForm');
     
 
 //Function to gather user city submission in the form. Alert if nothing is submitted.
-    var citySubmitHandler = function (event) {
+var citySubmitHandler = function (event) {
     event.preventDefault();
   
     var cityName = cityInputEl.value.trim();
     console.log(cityName);
     if (cityName) {
       
+  
       saveCity(cityName);
       loadPreviousSearches();
   
-      cityHistoryEl.textContent = '';
-      cityInputEl.value = '';
-
       
+      cityInputEl.value = '';
     } else {
       alert('Please enter a city');
     }
-    };
+  };
 
 
 //create function calling weather api to get 5 day forcast
