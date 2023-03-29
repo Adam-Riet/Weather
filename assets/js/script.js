@@ -42,6 +42,7 @@ var citySubmitHandler = function (event) {
   
       saveCity(cityName);
       loadPreviousSearches();
+      weatherData(cityName);
   
       
       cityInputEl.value = '';
@@ -91,9 +92,8 @@ function weatherData(cityName){
 
 
 
-weatherData(cityName);
+
 loadPreviousSearches();
 
 searchFormEl.addEventListener('submit', citySubmitHandler);
 
-// var apiUrl = 'api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={d94fcd0a3f247519e9f2462c13c0bc86}';
