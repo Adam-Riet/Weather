@@ -3,6 +3,9 @@ var cityHistoryEl = document.querySelector('#previous-searchers');
 var weatherInfoEl = document.querySelector('#weather-data');
 var searchButtonEl = document.querySelector('button');
 
+//create function storing user city in local storage
+
+//create function adding city saved in local storage as a button that can be selected later
 
 
   var citySubmitHandler = function (event) {
@@ -25,7 +28,7 @@ var searchButtonEl = document.querySelector('button');
   };
 
 
-
+//create function calling weather api to get 5 day forcast
 
 
 
