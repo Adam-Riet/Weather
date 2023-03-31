@@ -94,7 +94,7 @@ var displayWeatherData = function (temperature, wind, humidity) {
 
 
     var weatherDaily = document.createElement('div');
-    weatherDaily.textContent = ('temperature, wind, humidity');
+    weatherDaily.textContent = `Temperature: ${temperature} Wind: ${wind} Humidity: ${humidity}`;
 
     weatherInfoEl.appendChild(weatherDaily);
 
