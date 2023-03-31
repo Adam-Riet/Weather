@@ -32,6 +32,7 @@ var previousSearchesEl = document.querySelector('#previous-searches');
     cityBtn.classList.add('previous-search-btn');
     cityBtn.addEventListener('click', function () {
         weatherData(city);
+        weeklyData(city);
     });
     previousSearchesEl.appendChild(cityBtn);
     });}
@@ -53,7 +54,7 @@ var previousSearchesEl = document.querySelector('#previous-searches');
     };
 
 
-//create function calling weather api to get 5 day forcast
+//Function generating single day forecast.
 //&units=imperial needed in parameter. 
     function weatherData(cityName){
     var apiKey = 'd94fcd0a3f247519e9f2462c13c0bc86';
@@ -82,7 +83,7 @@ var previousSearchesEl = document.querySelector('#previous-searches');
     .catch(function (error) {
     alert('Error fetching weather data');
     });
-    }
+    };
 
 //Function to display weather gathered from weatherData function.
 //Creating new <p> element in html to hold weather info.
@@ -108,8 +109,36 @@ var previousSearchesEl = document.querySelector('#previous-searches');
     weatherDaily.appendChild(humidityEl);
 
     weatherInfoEl.appendChild(weatherDaily);
- };
+    };
 
+//Function to retrieve 5 day forecast
+//Weather substituted for forecast. Added cnt=5
+    function weeklyData(cityName){
+        var apiKey = 'd94fcd0a3f247519e9f2462c13c0bc86';
+        var weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}&cnt=5&units=imperial`;
+    
+    //Retrieving weather data based on city and only if city is valid. 
+        fetch(weatherUrl)
+        .then(function (response) {
+        if (response.status === 200) {
+       
+        return response.json();
+        } else {
+        alert('Failed to fetch weather data');
+        }
+        })
+    //Creating variables for temp, wind, humidity
+        .then(function (data) {
+        var temperature = data.main.temp;
+        var wind = data.wind.speed;
+        var humidity = data.main.humidity;
+        console.log(temperature, wind, humidity);
+        displayWeatherData(cityName, temperature, wind, humidity);
+        })
+        .catch(function (error) {
+        alert('Error fetching weather data');
+        });
+        };
 
 
 
