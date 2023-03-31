@@ -50,10 +50,13 @@
         top: 100px; /* Adjust this value based on the height of your search bar */
         padding: 10px; /* Add some padding for better appearance */
         width: 800px; /* Set the width of the box */
-        height: 200px; /* Set the height of the box */
-        padding: 10px;
-        border: 5px solid var(--fourth); /* Set the border style */
+        height: 300px; /* Set the height of the box */
+        padding: 5px;
+        border: 3px solid var(--fourth); /* Set the border style */
         overflow: auto; /* Add a scrollbar when the content exceeds the box size */
+        font-size: 30px;
+        color: var(--third);
+        justify-content: space-around;
         
       }
     

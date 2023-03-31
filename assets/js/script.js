@@ -44,7 +44,7 @@ var citySubmitHandler = function (event) {
     if (cityName) {
       
   
-      saveCity(cityName);
+      
       loadPreviousSearches();
       weatherData(cityName);
       
@@ -63,15 +63,18 @@ function weatherData(cityName){
     var apiKey = 'd94fcd0a3f247519e9f2462c13c0bc86';
     var weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
-
+//Retrieving weather data based on city and only if city is valid. 
     fetch(weatherUrl)
     .then(function (response) {
         if (response.status === 200) {
+            //Will only add city to previous searches if city is valid. 
+            saveCity(cityName);
             return response.json();
         } else {
             alert('Failed to fetch weather data');
         }
     })
+//Creating variables for temp, wind, humidity
     .then(function (data) {
         var temperature = data.main.temp;
         var wind = data.wind.speed;
@@ -91,15 +94,22 @@ function weatherData(cityName){
 //Function to display weather gathered from weatherData function
 
 var displayWeatherData = function (temperature, wind, humidity) {
-
-
     var weatherDaily = document.createElement('div');
-    weatherDaily.textContent = `Temperature: ${temperature} Wind: ${wind} Humidity: ${humidity}`;
-
+    
+    var temperatureEl = document.createElement('p');
+    temperatureEl.textContent = 'Temperature: ' + temperature;
+    weatherDaily.appendChild(temperatureEl);
+  
+    var windEl = document.createElement('p');
+    windEl.textContent = 'Wind: ' + wind;
+    weatherDaily.appendChild(windEl);
+  
+    var humidityEl = document.createElement('p');
+    humidityEl.textContent = 'Humidity: ' + humidity;
+    weatherDaily.appendChild(humidityEl);
+  
     weatherInfoEl.appendChild(weatherDaily);
-
-
-}
+  }
 
 
 
