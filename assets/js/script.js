@@ -3,6 +3,10 @@ var cityHistoryEl = document.querySelector('#previous-searches');
 var weatherInfoEl = document.querySelector('#weather-data');
 var searchButtonEl = document.querySelector('button');
 var searchFormEl = document.querySelector('#searchForm');
+var previousSearchesEl = document.querySelector('#previous-searches');
+
+
+
 
 //Saving user city to local storage.
     function saveCity(cityName) {
@@ -16,17 +20,17 @@ var searchFormEl = document.querySelector('#searchForm');
 // Function to load previous searches from local storage and display them as buttons
     function loadPreviousSearches() {
     var cities = JSON.parse(localStorage.getItem('cities')) || [];
-    var previousSearchesEl = document.querySelector('#previous-searches');
     previousSearchesEl.innerHTML = '';
 //Appending search history as buttons user can click on. 
-      cities.forEach(function (city) {
-      var cityBtn = document.createElement('button');
-      cityBtn.textContent = city;
-      cityBtn.classList.add('previous-search-btn');
-      cityBtn.addEventListener('click', function () {
+//Using a for loop to go through each city.
+    cities.forEach(function (city) {
+    var cityBtn = document.createElement('button');
+    cityBtn.textContent = city;
+    cityBtn.classList.add('previous-search-btn');
+    cityBtn.addEventListener('click', function () {
         
-      });
-      previousSearchesEl.appendChild(cityBtn);
+    });
+    previousSearchesEl.appendChild(cityBtn);
     });}
   
     
@@ -43,6 +47,8 @@ var citySubmitHandler = function (event) {
       saveCity(cityName);
       loadPreviousSearches();
       weatherData(cityName);
+      
+     
   
       
       cityInputEl.value = '';
@@ -67,13 +73,33 @@ function weatherData(cityName){
         }
     })
     .then(function (data) {
-        console.log(data);
+        var temperature = data.main.temp;
+        var wind = data.wind.speed;
+        var humidity = data.main.humidity;
+
+        console.log(temperature, wind, humidity);
+
+        displayWeatherData(temperature, wind, humidity);
     })
     .catch(function (error) {
         alert('Error fetching weather data');
     });
+
+    
 }
 
+//Function to display weather gathered from weatherData function
+
+var displayWeatherData = function (temperature, wind, humidity) {
+
+
+    var weatherDaily = document.createElement('div');
+    weatherDaily.textContent = ('temperature, wind, humidity');
+
+    weatherInfoEl.appendChild(weatherDaily);
+
+
+}
 
 
 
