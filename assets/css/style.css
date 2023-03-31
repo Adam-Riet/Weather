@@ -44,7 +44,9 @@
         margin-right: 1rem;
     }
     
-    #weather-data {
+   
+
+      #daily-weather {
         position: absolute;
         left: 450px; /* Position the element to the left of the screen */
         top: 100px; /* Adjust this value based on the height of your search bar */
@@ -57,8 +59,8 @@
         font-size: 30px;
         color: var(--third);
         justify-content: space-around;
-        
       }
+
     
     input[type="text"] {
         display: block;

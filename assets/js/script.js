@@ -31,7 +31,7 @@ var previousSearchesEl = document.querySelector('#previous-searches');
     cityBtn.textContent = city;
     cityBtn.classList.add('previous-search-btn');
     cityBtn.addEventListener('click', function () {
-        
+        weatherData(city);
     });
     previousSearchesEl.appendChild(cityBtn);
     });}
@@ -86,8 +86,8 @@ function weatherData(cityName){
         var humidity = data.main.humidity;
 
         console.log(temperature, wind, humidity);
-
-        displayWeatherData(temperature, wind, humidity);
+        // windEl.value = '';
+        displayWeatherData(cityName, temperature, wind, humidity);
     })
     .catch(function (error) {
         alert('Error fetching weather data');
@@ -97,24 +97,30 @@ function weatherData(cityName){
 }
 
 //Function to display weather gathered from weatherData function.
-//Creating new <p> element is in html to hold weather info.
-var displayWeatherData = function (temperature, wind, humidity) {
+//Creating new <p> element in html to hold weather info.
+var displayWeatherData = function (cityName, temperature, wind, humidity) {
+    weatherInfoEl.innerHTML = '';
+
     var weatherDaily = document.createElement('div');
-    
+
+    var cityNameEl = document.createElement('p');
+    cityNameEl.textContent = cityName;
+    weatherDaily.appendChild(cityNameEl);
+
     var temperatureEl = document.createElement('p');
     temperatureEl.textContent = 'Temperature: ' + temperature + '\u00B0F';
     weatherDaily.appendChild(temperatureEl);
-  
+
     var windEl = document.createElement('p');
     windEl.textContent = 'Wind: ' + wind + ' MPH';
     weatherDaily.appendChild(windEl);
-  
+
     var humidityEl = document.createElement('p');
     humidityEl.textContent = 'Humidity: ' + humidity + '%';
     weatherDaily.appendChild(humidityEl);
-  
+
     weatherInfoEl.appendChild(weatherDaily);
-  }
+}
 
 
 
