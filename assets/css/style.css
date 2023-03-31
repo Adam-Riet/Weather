@@ -57,7 +57,7 @@
         border: 3px solid var(--fourth); /* Set the border style */
         overflow: auto; /* Add a scrollbar when the content exceeds the box size */
         font-size: 30px;
-        color: var(--third);
+        color: var(--first);
         justify-content: space-around;
       }
 
