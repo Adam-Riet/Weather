@@ -6,7 +6,10 @@ var searchFormEl = document.querySelector('#searchForm');
 var previousSearchesEl = document.querySelector('#previous-searches');
 
 
-
+//Function to capitalize first letter of city 
+    function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
 //Saving user city to local storage.
     function saveCity(cityName) {
@@ -17,7 +20,7 @@ var previousSearchesEl = document.querySelector('#previous-searches');
       localStorage.setItem('cities', JSON.stringify(cities));
     }}
 
-// Function to load previous searches from local storage and display them as buttons
+//Function to load previous searches from local storage and display them as buttons
     function loadPreviousSearches() {
     var cities = JSON.parse(localStorage.getItem('cities')) || [];
     previousSearchesEl.innerHTML = '';
@@ -39,7 +42,7 @@ var previousSearchesEl = document.querySelector('#previous-searches');
 var citySubmitHandler = function (event) {
     event.preventDefault();
   
-    var cityName = cityInputEl.value.trim();
+    var cityName = capitalizeFirstLetter(cityInputEl.value.trim());
     console.log(cityName);
     if (cityName) {
       
@@ -59,9 +62,10 @@ var citySubmitHandler = function (event) {
 
 
 //create function calling weather api to get 5 day forcast
+//&units=imperial needed in parameter. 
 function weatherData(cityName){
     var apiKey = 'd94fcd0a3f247519e9f2462c13c0bc86';
-    var weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
+    var weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`;
 
 //Retrieving weather data based on city and only if city is valid. 
     fetch(weatherUrl)
@@ -92,21 +96,21 @@ function weatherData(cityName){
     
 }
 
-//Function to display weather gathered from weatherData function
-
+//Function to display weather gathered from weatherData function.
+//Creating new <p> element is in html to hold weather info.
 var displayWeatherData = function (temperature, wind, humidity) {
     var weatherDaily = document.createElement('div');
     
     var temperatureEl = document.createElement('p');
-    temperatureEl.textContent = 'Temperature: ' + temperature;
+    temperatureEl.textContent = 'Temperature: ' + temperature + '\u00B0F';
     weatherDaily.appendChild(temperatureEl);
   
     var windEl = document.createElement('p');
-    windEl.textContent = 'Wind: ' + wind;
+    windEl.textContent = 'Wind: ' + wind + ' MPH';
     weatherDaily.appendChild(windEl);
   
     var humidityEl = document.createElement('p');
-    humidityEl.textContent = 'Humidity: ' + humidity;
+    humidityEl.textContent = 'Humidity: ' + humidity + '%';
     weatherDaily.appendChild(humidityEl);
   
     weatherInfoEl.appendChild(weatherDaily);
