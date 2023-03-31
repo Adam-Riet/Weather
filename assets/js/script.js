@@ -45,7 +45,7 @@ var citySubmitHandler = function (event) {
       
   
       
-      loadPreviousSearches();
+      
       weatherData(cityName);
       
      
@@ -69,6 +69,7 @@ function weatherData(cityName){
         if (response.status === 200) {
             //Will only add city to previous searches if city is valid. 
             saveCity(cityName);
+            loadPreviousSearches();
             return response.json();
         } else {
             alert('Failed to fetch weather data');
