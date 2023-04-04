@@ -4,6 +4,7 @@ var weatherInfoEl = document.querySelector('#weather-data');
 var searchButtonEl = document.querySelector('button');
 var searchFormEl = document.querySelector('#searchForm');
 var previousSearchesEl = document.querySelector('#previous-searches');
+var forecastEl = document.querySelector('#weekly-forecast');
 
 
 //Function to capitalize first letter of city 
@@ -32,7 +33,7 @@ var previousSearchesEl = document.querySelector('#previous-searches');
     cityBtn.classList.add('previous-search-btn');
     cityBtn.addEventListener('click', function () {
         weatherData(city);
-        weeklyData(city);
+        
     });
     previousSearchesEl.appendChild(cityBtn);
     });}
@@ -74,11 +75,14 @@ var previousSearchesEl = document.querySelector('#previous-searches');
     })
 //Creating variables for temp, wind, humidity
     .then(function (data) {
+    var timestamp = data.dt;
+    var date = new Date(timestamp * 1000);
+    var todaysDate = date.toISOString().split('T')[0];
     var temperature = data.main.temp;
     var wind = data.wind.speed;
     var humidity = data.main.humidity;
     console.log(temperature, wind, humidity);
-    displayWeatherData(cityName, temperature, wind, humidity);
+    displayWeatherData(todaysDate, cityName, temperature, wind, humidity);
     })
     .catch(function (error) {
     alert('Error fetching weather data');
@@ -87,11 +91,15 @@ var previousSearchesEl = document.querySelector('#previous-searches');
 
 //Function to display weather gathered from weatherData function.
 //Creating new <p> element in html to hold weather info.
-    var displayWeatherData = function (cityName, temperature, wind, humidity) {
+    var displayWeatherData = function (todaysDate, cityName, temperature, wind, humidity) {
     weatherInfoEl.innerHTML = '';
 
     var weatherDaily = document.createElement('div');
 
+    var todaysDateEl = document.createElement('p');
+    todaysDateEl.textContent = todaysDate;
+    weatherDaily.appendChild(todaysDateEl);
+    
     var cityNameEl = document.createElement('p');
     cityNameEl.textContent = cityName;
     weatherDaily.appendChild(cityNameEl);
@@ -108,37 +116,39 @@ var previousSearchesEl = document.querySelector('#previous-searches');
     humidityEl.textContent = 'Humidity: ' + humidity + '%';
     weatherDaily.appendChild(humidityEl);
 
+    
+
     weatherInfoEl.appendChild(weatherDaily);
     };
 
-//Function to retrieve 5 day forecast
-//Weather substituted for forecast. Added cnt=5
-    function weeklyData(cityName){
-        var apiKey = 'd94fcd0a3f247519e9f2462c13c0bc86';
-        var weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}&cnt=5&units=imperial`;
+// // Function to retrieve 5 day forecast
+// // Weather substituted for forecast. Added cnt=5
+//     function weeklyData(cityName){
+//         var apiKey = 'd94fcd0a3f247519e9f2462c13c0bc86';
+//         var weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}&cnt=5&units=imperial`;
     
-    //Retrieving weather data based on city and only if city is valid. 
-        fetch(weatherUrl)
-        .then(function (response) {
-        if (response.status === 200) {
+//     //Retrieving weather data based on city and only if city is valid. 
+//         fetch(weatherUrl)
+//         .then(function (response) {
+//         if (response.status === 200) {
        
-        return response.json();
-        } else {
-        alert('Failed to fetch weather data');
-        }
-        })
-    //Creating variables for temp, wind, humidity
-        .then(function (data) {
-        var temperature = data.main.temp;
-        var wind = data.wind.speed;
-        var humidity = data.main.humidity;
-        console.log(temperature, wind, humidity);
-        displayWeatherData(cityName, temperature, wind, humidity);
-        })
-        .catch(function (error) {
-        alert('Error fetching weather data');
-        });
-        };
+//         return response.json();
+//         } else {
+//         alert('Failed to fetch weather data');
+//         }
+//         })
+//     //Creating variables for temp, wind, humidity
+//         .then(function (data) {
+//         var temperature = data.main.temp;
+//         var wind = data.wind.speed;
+//         var humidity = data.main.humidity;
+//         console.log(temperature, wind, humidity);
+//         displayWeatherData(cityName, temperature, wind, humidity);
+//         })
+//         .catch(function (error) {
+//         alert('Error fetching weather data');
+//         });
+//         };
 
 
 
