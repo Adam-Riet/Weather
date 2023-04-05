@@ -83,6 +83,7 @@ var forecastEl = document.querySelector('#weekly-forecast');
     var humidity = data.main.humidity;
     console.log(temperature, wind, humidity);
     displayWeatherData(todaysDate, cityName, temperature, wind, humidity);
+    weeklyData(cityName);
     })
     .catch(function (error) {
     alert('Error fetching weather data');
@@ -121,34 +122,76 @@ var forecastEl = document.querySelector('#weekly-forecast');
     weatherInfoEl.appendChild(weatherDaily);
     };
 
-// // Function to retrieve 5 day forecast
-// // Weather substituted for forecast. Added cnt=5
-//     function weeklyData(cityName){
-//         var apiKey = 'd94fcd0a3f247519e9f2462c13c0bc86';
-//         var weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}&cnt=5&units=imperial`;
+// Function to retrieve 5 day forecast
+// Weather substituted for forecast. Added cnt=5
+function weeklyData(cityName) {
+    var apiKey = 'd94fcd0a3f247519e9f2462c13c0bc86';
+    var weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}&cnt=40&units=imperial`;
+  
+    fetch(weatherUrl)
+      .then(function (response) {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          alert('Failed to fetch weather data');
+        }
+      })
+      .then(function (data) {
+        // Filter the data to get one instance per day (e.g., at 12:00 PM)
+        var dailyData = data.list.filter(function (item) {
+          return item.dt_txt.includes('12:00:00');
+        });
+  
+        console.log(dailyData);
+  
+        // Loop through the filtered data and display the daily forecast
+        forecastEl.innerHTML = '';
+        dailyData.forEach(function (day) {
+          var wtemperature = day.main.temp;
+          var wwind = day.wind.speed;
+          var whumidity = day.main.humidity;
+          var wdate = day.dt_txt.split(' ')[0]; // Extract the date from the timestamp
+  
+          console.log(wdate, wtemperature, wwind, whumidity);
+          // Call a new function to display the daily forecast (e.g., displayWeeklyWeatherData)
+          displayWeeklyWeatherData(wdate, cityName, wtemperature, wwind, whumidity);
+        });
+      })
+      .catch(function (error) {
+        alert('Error fetching weather data');
+      });
+  }
+
+  var displayWeeklyWeatherData = function (wdate, wtemperature, wwind, whumidity) {
     
-//     //Retrieving weather data based on city and only if city is valid. 
-//         fetch(weatherUrl)
-//         .then(function (response) {
-//         if (response.status === 200) {
-       
-//         return response.json();
-//         } else {
-//         alert('Failed to fetch weather data');
-//         }
-//         })
-//     //Creating variables for temp, wind, humidity
-//         .then(function (data) {
-//         var temperature = data.main.temp;
-//         var wind = data.wind.speed;
-//         var humidity = data.main.humidity;
-//         console.log(temperature, wind, humidity);
-//         displayWeatherData(cityName, temperature, wind, humidity);
-//         })
-//         .catch(function (error) {
-//         alert('Error fetching weather data');
-//         });
-//         };
+    
+
+    var weeklyWeather = document.createElement('div');
+
+    var weeklyDateEl = document.createElement('p');
+    weeklyDateEl.textContent = wdate;
+    weeklyWeather.appendChild(weeklyDateEl);
+    
+    // var weeklyCityNameEl = document.createElement('p');
+    // weeklyCityNameEl.textContent = cityName;
+    // weeklyWeather.appendChild(weeklyCityNameEl);
+
+    var weeklyTemperatureEl = document.createElement('p');
+    weeklyTemperatureEl.textContent = 'Temperature: ' + wtemperature + '\u00B0F';
+    weeklyWeather.appendChild(weeklyTemperatureEl);
+
+    var weeklyWindEl = document.createElement('p');
+    weeklyWindEl.textContent = 'Wind: ' + wwind + ' MPH';
+    weeklyWeather.appendChild(weeklyWindEl);
+
+    var weeklyHumidityEl = document.createElement('p');
+    weeklyHumidityEl.textContent = 'Humidity: ' + whumidity + '%';
+    weeklyWeather.appendChild(weeklyHumidityEl);
+
+    
+
+    forecastEl.appendChild(weeklyWeather);
+    };
 
 
 
