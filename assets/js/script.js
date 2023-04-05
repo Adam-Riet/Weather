@@ -172,10 +172,6 @@ function weeklyData(cityName) {
     weeklyDateEl.textContent = wdate;
     weeklyWeather.appendChild(weeklyDateEl);
     
-    // var weeklyCityNameEl = document.createElement('p');
-    // weeklyCityNameEl.textContent = cityName;
-    // weeklyWeather.appendChild(weeklyCityNameEl);
-
     var weeklyTemperatureEl = document.createElement('p');
     weeklyTemperatureEl.textContent = 'Temperature: ' + wtemperature + '\u00B0F';
     weeklyWeather.appendChild(weeklyTemperatureEl);
