@@ -1,9 +1,9 @@
 # Weather-Dashboard
 
 ## Description
-Travelling and want to know if a jacket is required? Throw the city in the search and get a daily/weekly forecast. You will get a breakdown of the temperature, wind, and humidity. 
+Travelling and want to know if a jacket is required? Throw the city in the search bar and get a daily/weekly forecast. You will get a breakdown of the temperature, wind, and humidity. 
 
-Cities will be saved in the search bar if you want to quickly switch between them. 
+Cities will be saved under the search bar if you want to quickly switch between them. 
 
 
 ![Alt text](https://github.com/Adam-Riet/Weather/blob/main/assets/images/Screenshot%202023-04-06%20at%201.29.56%20PM.png)
