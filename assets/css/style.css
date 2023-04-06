@@ -37,6 +37,7 @@ header {
 .container {
     display: flex;
     align-items: flex-start;
+    flex-wrap: nowrap;
 }
     
 .search-section {
@@ -69,18 +70,18 @@ header {
 #weekly-forecast {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    width: 800px; /* adjust this value to match the width of the daily weather section */
-    gap: 5px; /* adjust this value to create space between the forecast boxes */
+    width: 100%;
+    gap: 1px;
 }
 
 #weekly-forecast div {
-    background-color: #f0f0f0; /* change this to your desired background color */
+    background-color: var(--fifth); 
     border: 1px solid #0D5E2F;
+    color: white;
     border-radius: 5px;
-    padding: 10px;
+    padding: 10px; 
     margin: 10px;
-    width: 150px; /* adjust this value for the desired box width */
+    width: 150px;
 }
 
     
@@ -138,6 +139,7 @@ hr {
 .weather-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    align-items: left;
+    padding-left: 15px;
+    width: calc(100% - 300px - 1rem);
 }

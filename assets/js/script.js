@@ -154,7 +154,7 @@ function weeklyData(cityName) {
   
           console.log(wdate, wtemperature, wwind, whumidity);
           // Call a new function to display the daily forecast (e.g., displayWeeklyWeatherData)
-          displayWeeklyWeatherData(wdate, cityName, wtemperature, wwind, whumidity);
+          displayWeeklyWeatherData(wdate, wtemperature, wwind, whumidity);
         });
       })
       .catch(function (error) {
